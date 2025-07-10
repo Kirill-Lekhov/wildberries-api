@@ -18,5 +18,8 @@ class Request(BaseRequest):
 	def create(cls, question_id: str, text: str) -> "Request":
 		return cls(id=question_id, answer=RequestAnswer(text=text))
 
+	def as_request_payload(self):
+		return self.model_dump()
+
 
 Response = BaseResponse

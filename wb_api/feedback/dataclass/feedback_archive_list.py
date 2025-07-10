@@ -14,6 +14,9 @@ class Request(BaseRequest):
 	nm_id: Optional[int] = Field(default=None, serialization_alias="nmId")
 	order: Optional[Literal["dateAsc", "dateDesc"]] = None
 
+	def as_request_params(self):
+		return self.model_dump(by_alias=True, exclude_defaults=True)
+
 
 class Data(BaseModel):
 	feedbacks: List[Feedback]

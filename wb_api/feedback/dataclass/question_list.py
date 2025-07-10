@@ -43,6 +43,9 @@ class Request(BaseRequest):
 
 		return self
 
+	def as_request_params(self):
+		return self.model_dump(by_alias=True, exclude_none=True)
+
 
 class Data(BaseModel):
 	count_unanswered: int = Field(validation_alias="countUnanswered")

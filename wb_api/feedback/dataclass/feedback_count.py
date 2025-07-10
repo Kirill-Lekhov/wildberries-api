@@ -29,6 +29,9 @@ class Request(BaseRequest):
 
 		return "true" if value else "false"
 
+	def as_request_params(self):
+		return self.model_dump(by_alias=True, exclude_none=True)
+
 
 class Response(BaseResponse):
 	data: int
