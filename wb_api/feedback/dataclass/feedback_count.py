@@ -16,14 +16,14 @@ class Request(BaseRequest):
 	is_answered: Optional[bool] = Field(default=None, serialization_alias="isAnswered")
 
 	@field_serializer("date_from", "date_to", mode="plain")
-	def optional_dates_must_be_int(self, value: Optional[Arrow]) -> Optional[int]:
+	def optional_dates_must_be_optional_int(self, value: Optional[Arrow]) -> Optional[int]:
 		if value is None:
 			return None
 
 		return value.int_timestamp
 
 	@field_serializer("is_answered", mode="plain")
-	def optional_bool_must_be_str(self, value: Optional[bool]) -> Optional[str]:
+	def optional_bool_must_be_optional_str(self, value: Optional[bool]) -> Optional[str]:
 		if value is None:
 			return None
 

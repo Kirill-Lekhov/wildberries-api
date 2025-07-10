@@ -15,8 +15,8 @@ class Request(BaseRequest):
 	state: Literal["wbRu"] = "wbRu"
 
 	@classmethod
-	def create(cls, id: str, text: str) -> "Request":
-		return cls(id=id, answer=RequestAnswer(text=text))
+	def create(cls, question_id: str, text: str) -> "Request":
+		return cls(id=question_id, answer=RequestAnswer(text=text))
 
 
 Response = BaseResponse

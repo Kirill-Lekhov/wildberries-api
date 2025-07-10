@@ -15,8 +15,8 @@ class Request(BaseRequest):
 	state: Literal["none"] = "none"
 
 	@classmethod
-	def create(cls, feedback_id: str, text: str) -> "Request":
-		return cls(id=feedback_id, answer=RequestAnswer(text=text))
+	def create(cls, question_id: str, text: str) -> "Request":
+		return cls(id=question_id, answer=RequestAnswer(text=text))
 
 
 Response = BaseResponse
