@@ -8,8 +8,8 @@ from pydantic.fields import Field
 
 
 class Request(BaseRequest):
-	take: int
-	skip: int
+	take: int = Field(ge=1, le=5000)
+	skip: int = Field(ge=0)
 
 	nm_id: Optional[int] = Field(default=None, serialization_alias="nmId")
 	order: Optional[Literal["dateAsc", "dateDesc"]] = None
