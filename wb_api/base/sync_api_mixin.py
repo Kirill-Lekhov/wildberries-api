@@ -1,3 +1,5 @@
+from wb_api.exception import InvalidResponseError
+
 from http import HTTPStatus
 
 from requests.sessions import Session
@@ -14,4 +16,4 @@ class SyncAPIMixin:
 
 	def validate_response(self, response: Response, expected_status: HTTPStatus = HTTPStatus.OK) -> None:
 		if response.status_code != expected_status:
-			raise RuntimeError("Response is not valid")
+			raise InvalidResponseError("Response is not valid")

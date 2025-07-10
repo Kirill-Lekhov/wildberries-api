@@ -1,3 +1,5 @@
+from wb_api.exception import InvalidResponseError
+
 from http import HTTPStatus
 
 from aiohttp.client import ClientSession, ClientResponse
@@ -13,4 +15,4 @@ class AsyncAPIMixin:
 
 	def validate_response(self, response: ClientResponse, expected_status: HTTPStatus = HTTPStatus.OK) -> None:
 		if response.status != expected_status:
-			raise RuntimeError("Response is not valid")
+			raise InvalidResponseError("Response is not valid")
