@@ -20,6 +20,7 @@ from http import HTTPStatus
 class AsyncFeedbackAPI(AsyncAPIMixin, BaseFeedbackAPI):
 	async def ping(self) -> PingResponse:
 		url = self.router.ping()
+
 		async with self.session.get(url) as response:
 			self.validate_response(response)
 			return PingResponse.model_validate_json(await response.text())
