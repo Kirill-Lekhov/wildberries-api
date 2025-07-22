@@ -1,9 +1,10 @@
 from enum import Enum
+from typing import Final
 
 
-class BaseURL(Enum):
-	COMMON = "https://common-api.wildberries.ru"
-	FEEDBACK = "https://feedbacks-api.wildberries.ru"
+class BaseURL:
+	COMMON: Final[str] = "https://common-api.wildberries.ru"
+	FEEDBACK: Final[str] = "https://feedbacks-api.wildberries.ru"
 
 
 class Header(Enum):

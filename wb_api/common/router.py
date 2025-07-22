@@ -6,4 +6,4 @@ from wb_api.const import BaseURL
 class CommonRouter(Router):
 	@cache
 	def ping(self):
-		return f"{BaseURL.COMMON.value}/ping"
+		return f"{BaseURL.COMMON}/ping"
