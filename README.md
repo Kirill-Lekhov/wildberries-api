@@ -17,11 +17,13 @@ There are several ways to work with the API (synchronous and asynchronous). Both
 ```python
 from wb_api.sync_api import SyncAPI		# Sync mode
 from wb_api.async_api import AsyncAPI		# Async mode
+from wb_api.const import BaseURL
 
 
 def main() -> None:
 	api = SyncAPI.build(
 		token="...",
+		base_url=BaseURL,		# (optional) may be used for test circuits
 	)
 
 	# Do things here...
@@ -30,11 +32,12 @@ def main() -> None:
 async def main() -> None:
 	api = await AsyncAPI.build(
 		token="...",
+		base_url=BaseURL,		# (optional) may be used for test circuits
 	)
 
 	# Do things here...
 
-	await api.session.close()
+	await api.close()
 ```
 
 

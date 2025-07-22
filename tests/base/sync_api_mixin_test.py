@@ -1,5 +1,7 @@
 from wb_api.base.sync_api_mixin import SyncAPIMixin
+from wb_api.base.sync_config import SyncConfig
 from wb_api.exception import InvalidResponseError, AuthorizationError, NotFoundError
+from wb_api.const import BaseURL
 
 from unittest.mock import Mock
 from http import HTTPStatus
@@ -7,6 +9,15 @@ from typing import Optional, Type
 
 import pytest
 from requests.sessions import Session
+
+
+class BaseClient:
+	def __init__(self, config: SyncConfig) -> None:
+		pass
+
+
+class Client(SyncAPIMixin, BaseClient):
+	pass
 
 
 class TestSyncAPIMixin:
@@ -29,7 +40,8 @@ class TestSyncAPIMixin:
 		expected_error_text: Optional[str],
 	):
 		session = Session()
-		api = SyncAPIMixin(session)
+		config = SyncConfig(session, BaseURL)
+		api = Client(config)
 		response = Mock()
 		response.status_code = status
 

@@ -1,5 +1,7 @@
 from tests.fake_async_session import FakeAsyncSession
 from wb_api.common.async_api import AsyncCommonAPI
+from wb_api.base.async_config import AsyncConfig
+from wb_api.const import BaseURL
 
 from unittest.mock import patch, Mock
 
@@ -10,7 +12,8 @@ class TestAsyncCommonAPI:
 	@pytest.mark.asyncio()
 	async def test_ping(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncCommonAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncCommonAPI(config)
 
 		with patch("wb_api.common.async_api.PingResponse") as PingResponseMock:
 			PingResponseMock.model_validate_json = Mock()

@@ -1,4 +1,6 @@
 from wb_api.common.sync_api import SyncCommonAPI
+from wb_api.base.sync_config import SyncConfig
+from wb_api.const import BaseURL
 
 from unittest.mock import Mock, patch
 
@@ -9,7 +11,8 @@ class TestSyncCommonAPI:
 		session.get = Mock()
 		session.get.return_value = Mock()
 		session.get.return_value.text = "RAW DATA"
-		api = SyncCommonAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncCommonAPI(config)
 
 		with patch("wb_api.common.sync_api.PingResponse") as PingResponseMock:
 			PingResponseMock.model_validate_json = Mock()

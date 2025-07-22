@@ -5,6 +5,8 @@ from wb_api.feedback.dataclass import (
 	QuestionRejectRequest, QuestionAnswerAddRequest, QuestionAnswerUpdateRequest, FeedbackOrderReturnRequest,
 	FeedbackTextReportRequest, FeedbackProductReportRequest, FeedbackAnswerAddRequest, FeedbackAnswerUpdateRequest,
 )
+from wb_api.base.sync_config import SyncConfig
+from wb_api.const import BaseURL
 
 from unittest.mock import Mock, patch
 from http import HTTPStatus
@@ -18,7 +20,8 @@ class TestSyncFeedbackAPI:
 		session.get = Mock()
 		session.get.return_value = Mock()
 		session.get.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 
 		with patch("wb_api.feedback.sync_api.PingResponse") as PingResponseMock:
 			PingResponseMock.model_validate_json = Mock()
@@ -35,7 +38,8 @@ class TestSyncFeedbackAPI:
 		session.get = Mock()
 		session.get.return_value = Mock()
 		session.get.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 
 		with patch("wb_api.feedback.sync_api.NewFeedbacksQuestionsResponse") as NewFeedbacksQuestionsResponseMock:
 			NewFeedbacksQuestionsResponseMock.model_validate_json = Mock()
@@ -54,7 +58,8 @@ class TestSyncFeedbackAPI:
 		session.get = Mock()
 		session.get.return_value = Mock()
 		session.get.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 
 		with patch("wb_api.feedback.sync_api.QuestionCountUnansweredResponse") as QuestionCountUnansweredResponseMock:
 			QuestionCountUnansweredResponseMock.model_validate_json = Mock()
@@ -71,7 +76,8 @@ class TestSyncFeedbackAPI:
 		session.get = Mock()
 		session.get.return_value = Mock()
 		session.get.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 
 		with patch("wb_api.feedback.sync_api.QuestionCountResponse") as QuestionCountResponseMock:
 			QuestionCountResponseMock.model_validate_json = Mock()
@@ -99,7 +105,8 @@ class TestSyncFeedbackAPI:
 		session.get = Mock()
 		session.get.return_value = Mock()
 		session.get.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 		request = QuestionListRequest(is_answered=False, take=100, skip=0)
 
 		with patch("wb_api.feedback.sync_api.QuestionListResponse") as QuestionListResponseMock:
@@ -120,7 +127,8 @@ class TestSyncFeedbackAPI:
 		session.patch = Mock()
 		session.patch.return_value = Mock()
 		session.patch.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 		request = QuestionMarkAsReadRequest(id="question-id", was_viewed=True)
 
 		with patch("wb_api.feedback.sync_api.QuestionMarkAsReadResponse") as QuestionMarkAsReadResponseMock:
@@ -141,7 +149,8 @@ class TestSyncFeedbackAPI:
 		session.patch = Mock()
 		session.patch.return_value = Mock()
 		session.patch.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 		request = QuestionRejectRequest.create("question-id", "question-answer")
 
 		with patch("wb_api.feedback.sync_api.QuestionRejectResponse") as QuestionRejectResponseMock:
@@ -162,7 +171,8 @@ class TestSyncFeedbackAPI:
 		session.patch = Mock()
 		session.patch.return_value = Mock()
 		session.patch.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 		request = QuestionAnswerAddRequest.create("question-id", "question-answer")
 
 		with patch("wb_api.feedback.sync_api.QuestionAnswerAddResponse") as QuestionAnswerAddResponseMock:
@@ -183,7 +193,8 @@ class TestSyncFeedbackAPI:
 		session.patch = Mock()
 		session.patch.return_value = Mock()
 		session.patch.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 		request = QuestionAnswerUpdateRequest.create("question-id", "question-answer")
 
 		with patch("wb_api.feedback.sync_api.QuestionAnswerUpdateResponse") as QuestionAnswerUpdateResponseMock:
@@ -204,7 +215,8 @@ class TestSyncFeedbackAPI:
 		session.get = Mock()
 		session.get.return_value = Mock()
 		session.get.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 		request = QuestionGetRequest(id="question-id")
 
 		with patch("wb_api.feedback.sync_api.QuestionGetResponse") as QuestionGetResponseMock:
@@ -225,7 +237,8 @@ class TestSyncFeedbackAPI:
 		session.get = Mock()
 		session.get.return_value = Mock()
 		session.get.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 
 		with patch("wb_api.feedback.sync_api.FeedbackCountUnansweredResponse") as FeedbackCountUnansweredResponseMock:
 			FeedbackCountUnansweredResponseMock.model_validate_json = Mock()
@@ -244,7 +257,8 @@ class TestSyncFeedbackAPI:
 		session.get = Mock()
 		session.get.return_value = Mock()
 		session.get.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 
 		with patch("wb_api.feedback.sync_api.FeedbackCountResponse") as FeedbackCountResponseMock:
 			FeedbackCountResponseMock.model_validate_json = Mock()
@@ -272,7 +286,8 @@ class TestSyncFeedbackAPI:
 		session.get = Mock()
 		session.get.return_value = Mock()
 		session.get.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 		request = FeedbackListRequest(is_answered=True, take=100, skip=0)
 
 		with patch("wb_api.feedback.sync_api.FeedbackListResponse") as FeedbackListResponseMock:
@@ -293,7 +308,8 @@ class TestSyncFeedbackAPI:
 		session.get = Mock()
 		session.get.return_value = Mock()
 		session.get.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 		request = FeedbackSupplierValuationsRequest(locale="zh")
 
 		with patch("wb_api.feedback.sync_api.FeedbackSupplierValuationsResponse") as FeedbackSupplierValuationsResponseMock:
@@ -320,7 +336,8 @@ class TestSyncFeedbackAPI:
 		session = Mock()
 		session.post = Mock()
 		session.post.return_value = Mock()
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 		request = FeedbackTextReportRequest(id="feedback-id", supplier_feedback_valuation=512)
 
 		with patch.object(api, "validate_response") as validate_response_mock:
@@ -335,7 +352,8 @@ class TestSyncFeedbackAPI:
 		session = Mock()
 		session.post = Mock()
 		session.post.return_value = Mock()
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 		request = FeedbackProductReportRequest(id="feedback-id", supplier_product_valuation=512)
 
 		with patch.object(api, "validate_response") as validate_response_mock:
@@ -350,7 +368,8 @@ class TestSyncFeedbackAPI:
 		session = Mock()
 		session.post = Mock()
 		session.post.return_value = Mock()
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 		request = FeedbackAnswerAddRequest(id="feedback-id", text="feedback-answer")
 
 		with patch.object(api, "validate_response") as validate_response_mock:
@@ -365,7 +384,8 @@ class TestSyncFeedbackAPI:
 		session = Mock()
 		session.patch = Mock()
 		session.patch.return_value = Mock()
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 		request = FeedbackAnswerUpdateRequest(id="feedback-id", text="feedback-answer")
 
 		with patch.object(api, "validate_response") as validate_response_mock:
@@ -381,7 +401,8 @@ class TestSyncFeedbackAPI:
 		session.post = Mock()
 		session.post.return_value = Mock()
 		session.post.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 		request = FeedbackOrderReturnRequest(feedback_id="feedback-id")
 
 		with patch("wb_api.feedback.sync_api.FeedbackOrderReturnResponse") as FeedbackOrderReturnResponseMock:
@@ -402,7 +423,8 @@ class TestSyncFeedbackAPI:
 		session.get = Mock()
 		session.get.return_value = Mock()
 		session.get.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 		request = FeedbackGetRequest(id="feedback-id")
 
 		with patch("wb_api.feedback.sync_api.FeedbackGetResponse") as FeedbackGetResponseMock:
@@ -423,7 +445,8 @@ class TestSyncFeedbackAPI:
 		session.get = Mock()
 		session.get.return_value = Mock()
 		session.get.return_value.text = "RAW DATA"
-		api = SyncFeedbackAPI(session)
+		config = SyncConfig(session, BaseURL)
+		api = SyncFeedbackAPI(config)
 		request = FeedbackArchiveListRequest(take=100, skip=0)
 
 		with patch("wb_api.feedback.sync_api.FeedbackArchiveListResponse") as FeedbackArchiveListMockResponse:

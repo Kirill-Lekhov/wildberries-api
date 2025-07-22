@@ -6,6 +6,8 @@ from wb_api.feedback.dataclass import (
 	QuestionRejectRequest, QuestionAnswerAddRequest, QuestionAnswerUpdateRequest, FeedbackTextReportRequest,
 	FeedbackProductReportRequest, FeedbackAnswerAddRequest, FeedbackAnswerUpdateRequest, FeedbackOrderReturnRequest,
 )
+from wb_api.base.async_config import AsyncConfig
+from wb_api.const import BaseURL
 
 from unittest.mock import patch, Mock
 from http import HTTPStatus
@@ -18,7 +20,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_ping(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 
 		with patch("wb_api.feedback.async_api.PingResponse") as PingResponseMock:
 			PingResponseMock.model_validate_json = Mock()
@@ -35,7 +38,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_check_new_feedbacks_questions(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 
 		with patch("wb_api.feedback.async_api.NewFeedbacksQuestionsResponse") as NewFeedbacksQuestionsResponseMock:
 			NewFeedbacksQuestionsResponseMock.model_validate_json = Mock()
@@ -52,7 +56,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_get_question_count_unanswered(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 
 		with patch("wb_api.feedback.async_api.QuestionCountUnansweredResponse") as QuestionCountUnansweredResponseMock:
 			QuestionCountUnansweredResponseMock.model_validate_json = Mock()
@@ -69,7 +74,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_get_question_count(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 
 		with patch("wb_api.feedback.async_api.QuestionCountResponse") as QuestionCountResponseMock:
 			QuestionCountResponseMock.model_validate_json = Mock()
@@ -93,7 +99,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_get_question_list(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 		request = QuestionListRequest(is_answered=True, take=100, skip=0)
 
 		with patch("wb_api.feedback.async_api.QuestionListResponse") as QuestionListResponseMock:
@@ -111,7 +118,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_mark_question_as_read(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 		request = QuestionMarkAsReadRequest(id="question-id", was_viewed=True)
 
 		with patch("wb_api.feedback.async_api.QuestionMarkAsReadResponse") as QuestionMarkAsReadResponseMock:
@@ -129,7 +137,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_reject_question(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 		request = QuestionRejectRequest.create("question-id", "question-answer")
 
 		with patch("wb_api.feedback.async_api.QuestionRejectResponse") as QuestionRejectResponseMock:
@@ -147,7 +156,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_add_question_answer(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 		request = QuestionAnswerAddRequest.create("question-id", "question-answer")
 
 		with patch("wb_api.feedback.async_api.QuestionAnswerAddResponse") as QuestionAnswerAddResponseMock:
@@ -165,7 +175,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_update_question_answer(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 		request = QuestionAnswerUpdateRequest.create("question-id", "question-answer")
 
 		with patch("wb_api.feedback.async_api.QuestionAnswerUpdateResponse") as QuestionAnswerUpdateResponseMock:
@@ -183,7 +194,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_get_question(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 		request = QuestionGetRequest(id="question-id")
 
 		with patch("wb_api.feedback.async_api.QuestionGetResponse") as QuestionGetResponseMock:
@@ -201,7 +213,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_get_feedback_count_unanswered(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 
 		with patch("wb_api.feedback.async_api.FeedbackCountUnansweredResponse") as FeedbackCountUnansweredResponseMock:
 			FeedbackCountUnansweredResponseMock.model_validate_json = Mock()
@@ -218,7 +231,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_get_feedback_count(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 
 		with patch("wb_api.feedback.async_api.FeedbackCountResponse") as FeedbackCountResponseMock:
 			FeedbackCountResponseMock.model_validate_json = Mock()
@@ -242,7 +256,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_get_feedback_list(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 		request = FeedbackListRequest(is_answered=True, take=100, skip=0)
 
 		with patch("wb_api.feedback.async_api.FeedbackListResponse") as FeedbackListResponseMock:
@@ -260,7 +275,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_get_feedback_supplier_valuations(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 		request = FeedbackSupplierValuationsRequest(locale="zh")
 
 		with patch("wb_api.feedback.async_api.FeedbackSupplierValuationsResponse") as FeedbackSupplierValuationsResponseMock:
@@ -284,7 +300,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_report_feedback_text(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 		request = FeedbackTextReportRequest(id="question-id", supplier_feedback_valuation=512)
 
 		with patch.object(api, "validate_response") as validate_response_mock:
@@ -297,7 +314,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_report_feedback_product(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 		request = FeedbackProductReportRequest(id="question-id", supplier_product_valuation=512)
 
 		with patch.object(api, "validate_response") as validate_response_mock:
@@ -310,7 +328,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_add_feedback_answer(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 		request = FeedbackAnswerAddRequest(id="feedback-id", text="feedback-answer")
 
 		with patch.object(api, "validate_response") as validate_response_mock:
@@ -323,7 +342,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_update_feedback_answer(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 		request = FeedbackAnswerUpdateRequest(id="feedback-id", text="feedback-answer")
 
 		with patch.object(api, "validate_response") as validate_response_mock:
@@ -336,7 +356,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_return_feedback_order(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 		request = FeedbackOrderReturnRequest(feedback_id="feedback-id")
 
 		with patch("wb_api.feedback.async_api.FeedbackOrderReturnResponse") as FeedbackOrderReturnResponseMock:
@@ -354,7 +375,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_get_feedback(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 		request = FeedbackGetRequest(id="feedback-id")
 
 		with patch("wb_api.feedback.async_api.FeedbackGetResponse") as FeedbackGetResponseMock:
@@ -372,7 +394,8 @@ class TestAsyncFeedbackAPI:
 	@pytest.mark.asyncio()
 	async def test_get_feedback_archive_list(self):
 		session = FakeAsyncSession("RAW DATA")
-		api = AsyncFeedbackAPI(session)		# type: ignore - for testing purposes
+		config = AsyncConfig(session, BaseURL)		# type: ignore - for testing purposes
+		api = AsyncFeedbackAPI(config)
 		request = FeedbackArchiveListRequest(take=100, skip=0)
 
 		with patch("wb_api.feedback.async_api.FeedbackArchiveListResponse") as FeedbackArchiveListResponseMock:
