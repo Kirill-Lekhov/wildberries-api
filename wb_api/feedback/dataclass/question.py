@@ -14,7 +14,7 @@ class QuestionAnswer(BaseModel):
 
 	text: str
 	editable: bool
-	created_at: Arrow = Field(validation_alias="createdDate")
+	created_at: Arrow = Field(validation_alias="createDate")
 
 	@field_validator("created_at", mode="before")
 	@classmethod
