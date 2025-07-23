@@ -1,6 +1,6 @@
 [project]
 name = "wildberries-api"
-version = "1.0.1"
+version = "1.0.0"
 description = "Wildberries API client"
 readme = "README.md"
 authors = [
