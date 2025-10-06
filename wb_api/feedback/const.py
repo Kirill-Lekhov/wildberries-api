@@ -17,6 +17,7 @@ class FeedbackAnswerState(Enum):
 	ACCEPTED = "wbRu"
 	ON_REVIEW = "reviewRequired"
 	REJECTED = "rejected"
+	REJECTED_ANTISPAM = "rejectedAntispam"
 
 
 class MatchingSize(Enum):
