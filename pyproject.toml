@@ -18,10 +18,12 @@ sync = [
     "requests>=2.32.4",
 ]
 async = [
-    "aiohttp>=3.10.11",
+    "aiohttp>=3.10.11 ; python_full_version < '3.13'",
+    "aiohttp>=3.13.3 ; python_full_version >= '3.13'",
 ]
 all = [
-    "aiohttp>=3.10.11",
+    "aiohttp>=3.10.11 ; python_full_version < '3.13'",
+    "aiohttp>=3.13.3 ; python_full_version >= '3.13'",
     "requests>=2.32.4",
 ]
 
@@ -34,7 +36,7 @@ dev = [
     "aiohttp>=3.10.11",
     "flake8>=7.1.2",
     "flake8-zale>=0.2.1",
-    "pip-audit-extra>=0.1.1",
+    "pip-audit-extra>=1.0.1",
     "pytest>=8.3.5",
     "pytest-asyncio>=0.24.0",
     "pytest-cov>=5.0.0",
