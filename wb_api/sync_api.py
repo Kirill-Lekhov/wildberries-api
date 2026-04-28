@@ -1,6 +1,7 @@
 from wb_api.generic.requests.auth import JWTTokenAuth
 from wb_api.common.sync_api import SyncCommonAPI
 from wb_api.feedback.sync_api import SyncFeedbackAPI
+from wb_api.chat.sync_api import SyncChatAPI
 from wb_api.const import Header, BaseURL
 from wb_api.base.config import BaseURL as BaseURLProto
 from wb_api.base.sync_config import SyncConfig
@@ -14,11 +15,13 @@ class SyncAPI:
 	config: SyncConfig
 	common: SyncCommonAPI
 	feedback: SyncFeedbackAPI
+	chat: SyncChatAPI
 
 	def __init__(self, config: SyncConfig) -> None:
 		self.config = config
 		self.common = SyncCommonAPI(config)
 		self.feedback = SyncFeedbackAPI(config)
+		self.chat = SyncChatAPI(config)
 
 	@classmethod
 	def build(cls, token: str, *, base_url: Type[BaseURLProto] = BaseURL) -> "SyncAPI":

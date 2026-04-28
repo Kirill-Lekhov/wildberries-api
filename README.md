@@ -349,3 +349,82 @@ response = api.feedback.get_feedback_archive_list(request)
 ```
 
 Docs: https://dev.wildberries.ru/openapi/user-communication#tag/Otzyvy/paths/~1api~1v1~1feedbacks~1archive/get
+
+## Chat API
+### Get chat list
+```python
+# Sync mode
+from wb_api.sync_api import SyncAPI
+
+
+api = SyncAPI.build(...)
+response = api.chat.get_chat_list()
+```
+
+Docs: https://dev.wildberries.ru/docs/openapi/user-communication#tag/Chat-s-pokupatelyami/paths/~1api~1v1~1seller~1chats/get
+
+### Get chat event list
+```python
+# Sync mode
+from wb_api.sync_api import SyncAPI
+from wb_api.chat.dataclass import ChatEventListRequest
+
+
+request = ChatEventListRequest(next=...)
+response = api.chat.get_chat_event_list()
+# or
+response = api.chat.get_chat_event_list(request)
+```
+
+Docs: https://dev.wildberries.ru/docs/openapi/user-communication#tag/Chat-s-pokupatelyami/paths/~1api~1v1~1seller~1events/get
+
+#### Notes
+* ChatEvent may contain expired `reply_sign`
+
+### Send chat message
+```python
+# Sync mode
+import os
+
+from wb_api.sync_api import SyncAPI
+from wb_api.chat.dataclass import ChatMessageCreateRequest
+from wb_api.base.dataclass import File
+
+
+# text message sending
+request = ChatMessageCreateRequest(reply_sign="...", message="...")
+response = api.chat.create_chat_message(request)
+# file message sending
+request = ChatMessageCreateRequest(
+	reply_sign="...",
+	file=[
+		File(
+			name="image.png",
+			content=open("image.png", mode="rb"),
+			content_type="image/png",
+			content_length=os.path.getsize("image.png"),
+		),
+	],
+)
+response = api.chat.create_chat_message(request)
+```
+
+Docs: https://dev.wildberries.ru/docs/openapi/user-communication#tag/Chat-s-pokupatelyami/paths/~1api~1v1~1seller~1message/post
+
+#### Notes
+* Maximum size of a single file is 5 MB;
+* Maximum size of all files is 30 MB;
+* See the list of supported formats in the WB documentation.
+
+### Download file
+```python
+# Sync mode
+from wb_api.sync_api import SyncAPI
+from wb_api.chat.dataclass import FileDownloadRequest
+
+
+request = FileDownloadRequest(download_id="<uuid>")
+file = api.chat.download_file(request)
+```
+
+Docs: https://dev.wildberries.ru/docs/openapi/user-communication#tag/Chat-s-pokupatelyami/paths/~1api~1v1~1seller~1download~1%7Bid%7D/get

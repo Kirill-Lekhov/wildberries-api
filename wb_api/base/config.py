@@ -7,6 +7,7 @@ T = TypeVar("T")
 class BaseURL(Protocol):
 	COMMON: ClassVar[str]
 	FEEDBACK: ClassVar[str]
+	CHAT: ClassVar[str]
 
 
 class Config(Generic[T]):

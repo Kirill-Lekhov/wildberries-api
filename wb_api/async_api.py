@@ -1,6 +1,7 @@
 from wb_api.const import Header, BaseURL
 from wb_api.common.async_api import AsyncCommonAPI
 from wb_api.feedback.async_api import AsyncFeedbackAPI
+from wb_api.chat.async_api import AsyncChatAPI
 from wb_api.base.async_config import AsyncConfig
 from wb_api.base.config import BaseURL as BaseURLProto
 
@@ -13,11 +14,13 @@ class AsyncAPI:
 	config: AsyncConfig
 	common: AsyncCommonAPI
 	feedback: AsyncFeedbackAPI
+	chat: AsyncChatAPI
 
 	def __init__(self, config: AsyncConfig) -> None:
 		self.config = config
 		self.common = AsyncCommonAPI(config)
 		self.feedback = AsyncFeedbackAPI(config)
+		self.chat = AsyncChatAPI(config)
 
 	async def close(self) -> None:
 		await self.config.session.close()

@@ -12,3 +12,7 @@ class AuthorizationError(InvalidResponseError):
 
 class NotFoundError(InvalidResponseError):
 	pass
+
+
+class FileModerationError(InvalidResponseError):
+	pass

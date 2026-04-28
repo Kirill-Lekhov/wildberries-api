@@ -5,6 +5,7 @@ from typing import ClassVar
 class BaseURL:
 	COMMON: ClassVar[str] = "https://common-api.wildberries.ru"
 	FEEDBACK: ClassVar[str] = "https://feedbacks-api.wildberries.ru"
+	CHAT: ClassVar[str] = "https://buyer-chat-api.wildberries.ru"
 
 
 class Header(Enum):
