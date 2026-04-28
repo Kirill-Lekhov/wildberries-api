@@ -152,7 +152,7 @@ class TestSyncChatAPI:
 
 		request = ChatMessageCreateRequest(
 			reply_sign="REPLY_SIGN",
-			file=[File.build(b"deadbee", "text/plain", 7, name="text.txt")],
+			file=[File.build(b"deadbee", "text/plain", name="text.txt")],
 		)
 		ChatMessageCreateResponseMock.reset_mock()
 		validate_response_mock.reset_mock()

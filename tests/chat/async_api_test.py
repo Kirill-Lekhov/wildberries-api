@@ -151,7 +151,7 @@ class TestAsyncChatAPI:
 		session.post.reset_mock()
 		request = ChatMessageCreateRequest(
 			reply_sign="REPLY_SIGN",
-			file=[File.build(b"deadbee", content_type="text/plain", content_length=7, name="text.txt")],
+			file=[File.build(b"deadbee", content_type="text/plain", name="text.txt")],
 		)
 
 		with patch("wb_api.chat.async_api.ChatMessageCreateResponse") as ChatMessageCreateResponseMock:
