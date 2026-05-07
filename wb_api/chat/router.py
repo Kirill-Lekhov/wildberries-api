@@ -19,6 +19,5 @@ class ChatRouter(Router):
 	def chat_message_create(self) -> str:
 		return f"{self.base_url}/api/v1/seller/message"
 
-	@cache
 	def file_download(self, download_id: str) -> str:
 		return f"{self.base_url}/api/v1/seller/download/{download_id}"
