@@ -88,7 +88,10 @@ class Result(BaseModel):
 
 	@field_validator("newest_event_time", "oldest_event_time", mode="before")
 	@classmethod
-	def validate_datetime(cls, value: Any) -> arrow.Arrow:
+	def validate_datetime(cls, value: Any) -> Optional[arrow.Arrow]:
+		if value is None:
+			return None
+
 		return arrow.get(value)
 
 
