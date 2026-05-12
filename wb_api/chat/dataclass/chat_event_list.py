@@ -81,8 +81,8 @@ class Result(BaseModel):
 	model_config = ConfigDict(arbitrary_types_allowed=True)
 
 	next: int
-	newest_event_time: arrow.Arrow = Field(validation_alias="newestEventTime")
-	oldest_event_time: arrow.Arrow = Field(validation_alias="oldestEventTime")
+	newest_event_time: Optional[arrow.Arrow] = Field(default=None, validation_alias="newestEventTime")
+	oldest_event_time: Optional[arrow.Arrow] = Field(default=None, validation_alias="oldestEventTime")
 	total_events: int = Field(validation_alias="totalEvents")
 	events: List[Event]
 
